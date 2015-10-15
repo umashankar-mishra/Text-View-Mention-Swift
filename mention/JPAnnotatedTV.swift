@@ -21,7 +21,7 @@ class JPAnnotatedTV: UITextView, UITextViewDelegate {
   }
 
   func textViewDidChange(textView: UITextView) {
-
+    setNeedsDisplay()
   }
 
 
@@ -31,7 +31,8 @@ class JPAnnotatedTV: UITextView, UITextViewDelegate {
   }
 
   func setup() {
-    backgroundColor = UIColor.whiteColor()
+   backgroundColor = UIColor.whiteColor()
+    delegate = self
   }
 
 
