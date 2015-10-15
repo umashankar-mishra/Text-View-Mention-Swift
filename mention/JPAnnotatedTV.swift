@@ -21,7 +21,7 @@ class JPAnnotatedTV: UITextView, UITextViewDelegate {
   }
 
   func textViewDidChange(textView: UITextView) {
-    setNeedsDisplay()
+
   }
 
 
@@ -45,32 +45,34 @@ class JPAnnotatedTV: UITextView, UITextViewDelegate {
       let temp = elem as String
       return temp.containsString("#")
     }
-//
-//    var ranges = [NSRange]()
-//    for m in mm {
-//      let rng = text.rangeOfString(
-    m)
-//      print(<#T##items: Any...##Any#>)
-//    }
 
-    let range = NSMakeRange(3, 6)
-    let begining = beginningOfDocument
-    let start = positionFromPosition(begining, offset: range.location)
-    let end = positionFromPosition(start! , offset: range.length)
+    var ranges = [NSRange]()
+    for m in mm {
+      let rng = (text as NSString).rangeOfString(m)
+      ranges.append(rng)
+    }
 
 
-    let textRange = textRangeFromPosition(start!, toPosition: end!)
-    let rect = firstRectForRange(textRange!)
-    print(rect)
+    for range in ranges {
+      let begining = beginningOfDocument
+      let start = positionFromPosition(begining, offset: range.location)
+      let end = positionFromPosition(start! , offset: range.length)
+      let textRange = textRangeFromPosition(start!, toPosition: end!)
+      var rect = firstRectForRange(textRange!)
+      print(rect)
 
+      rect.size.height = rect.height - 5
+      rect.origin.y = rect.origin.y + 2.5
 
-    path = UIBezierPath(roundedRect: rect, cornerRadius: 10)
+      path = UIBezierPath(roundedRect: rect, cornerRadius: 10)
 
-    UIColor.redColor().setStroke()
-    UIColor.redColor().setFill()
-        path.fill()
-    path.lineWidth = 1.0
-    path.stroke()
+      UIColor.redColor().setStroke()
+      UIColor.redColor().setFill()
+      path.fill()
+      path.lineWidth = 1.0
+      path.stroke()
+    }
+
   }
 
 }
